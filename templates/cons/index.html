@@ -1,4 +1,5 @@
 {% extends "cons/base.html" %}
+{% load static %}
 
 {% block title %}JEA Consultancy Firm | Mining and Mineral Processing Engineering{% endblock %}
 {% block body_class %}home-page{% endblock %}
@@ -18,14 +19,8 @@
           </div>
         </div>
 
-        <div class="hero-visual reveal" role="img" href="jared.jpeng">
-          <div class="placeholder-frame">
-            <div class="placeholder-content">
-              <i class="bi bi-minecart-loaded" aria-hidden="true"></i>
-              <span>Mining Operation Image</span>
-            </div>
-            <div class="engineering-lines" aria-hidden="true"></div>
-          </div>
+        <div class="hero-visual reveal has-image" role="img" aria-label="Mining operations image">
+          <img src="{% static 'assets/img/about/mining.jpg' %}" alt="Mining operations">
         </div>
       </div>
     </div>
@@ -34,11 +29,8 @@
   <section id="about" class="section">
     <div class="container">
       <div class="split-layout align-items-center">
-        <div class="media-placeholder reveal" role="img" aria-label="Placeholder for Jared Etaba professional image">
-          <div class="placeholder-content">
-            <i class="bi bi-person-vcard" aria-hidden="true"></i>
-            <span>Professional Image</span>
-          </div>
+        <div class="media-placeholder reveal has-image" role="img" aria-label="Jared Etaba professional image">
+          <img src="{% static 'assets/img/about/jared.jpeg' %}" alt="Jared Etaba professional photo">
         </div>
 
         <div class="section-copy reveal">
@@ -127,32 +119,32 @@
 
       <div class="equipment-grid">
         <article class="equipment-card reveal">
-          <div class="equipment-image" role="img" aria-label="Jaw crusher image placeholder">
-            <i class="bi bi-image" aria-hidden="true"></i>
+          <div class="equipment-image has-image" role="img" aria-label="Jaw crusher image">
+            <img src="{% static 'assets/img/equipment/jawcrusher.jpg' %}" alt="Jaw crusher">
           </div>
           <h3>Jaw Crusher</h3>
           <p>Primary crushing equipment for hard rock size reduction, feed control, liner inspection, and throughput stability.</p>
         </article>
 
         <article class="equipment-card reveal">
-          <div class="equipment-image" role="img" aria-label="Cone crusher image placeholder">
-            <i class="bi bi-image" aria-hidden="true"></i>
+          <div class="equipment-image has-image" role="img" aria-label="Cone crusher image">
+            <img src="{% static 'assets/img/equipment/conecrusher.jpg' %}" alt="Cone crusher">
           </div>
           <h3>Cone Crusher</h3>
           <p>Secondary and tertiary crushing systems requiring chamber selection, closed side setting control, and wear monitoring.</p>
         </article>
 
         <article class="equipment-card reveal">
-          <div class="equipment-image" role="img" aria-label="Vibrating screen image placeholder">
-            <i class="bi bi-image" aria-hidden="true"></i>
+          <div class="equipment-image has-image" role="img" aria-label="Vibrating screen image">
+            <img src="{% static 'assets/img/equipment/vibrating-screen.jpg' %}" alt="Vibrating screen">
           </div>
           <h3>Vibrating Screen</h3>
           <p>Classification equipment for efficient separation, deck performance, screen media selection, and vibration checks.</p>
         </article>
 
         <article class="equipment-card reveal">
-          <div class="equipment-image" role="img" aria-label="Conveyor systems image placeholder">
-            <i class="bi bi-image" aria-hidden="true"></i>
+          <div class="equipment-image has-image" role="img" aria-label="Conveyor systems image">
+            <img src="{% static 'assets/img/equipment/conveyor-system.jpg' %}" alt="Conveyor systems">
           </div>
           <h3>Conveyor Systems</h3>
           <p>Material handling systems covering belt loading, transfer points, alignment, spillage control, and reliability improvement.</p>
@@ -189,7 +181,9 @@
 
       <div class="project-grid">
         <article class="project-card reveal">
-          <div class="project-image" role="img" aria-label="Crushing plant design project image placeholder"></div>
+          <div class="project-image has-image" role="img" aria-label="Crushing plant design project image">
+            <img src="{% static 'assets/img/projects/crushing-point.jpg' %}" alt="Crushing plant design project">
+          </div>
           <div>
             <span>Plant Design</span>
             <h3>Crushing Plant Design Projects</h3>
@@ -198,7 +192,9 @@
         </article>
 
         <article class="project-card reveal">
-          <div class="project-image" role="img" aria-label="Pit optimization project image placeholder"></div>
+          <div class="project-image has-image" role="img" aria-label="Pit optimization project image">
+            <img src="{% static 'assets/img/projects/pit-optimization.jpg' %}" alt="Pit optimization project">
+          </div>
           <div>
             <span>Mine Planning</span>
             <h3>Pit Optimization Projects</h3>
@@ -207,7 +203,9 @@
         </article>
 
         <article class="project-card reveal">
-          <div class="project-image" role="img" aria-label="Maintenance project image placeholder"></div>
+          <div class="project-image has-image" role="img" aria-label="Maintenance project image">
+            <img src="{% static 'assets/img/projects/maintenaince-project.jpg' %}" alt="Maintenance project">
+          </div>
           <div>
             <span>Reliability</span>
             <h3>Maintenance Projects</h3>
@@ -216,7 +214,9 @@
         </article>
 
         <article class="project-card reveal">
-          <div class="project-image" role="img" aria-label="Production improvement project image placeholder"></div>
+          <div class="project-image has-image" role="img" aria-label="Production improvement project image">
+            <img src="{% static 'assets/img/projects/project-improvement.jpg' %}" alt="Production improvement project">
+          </div>
           <div>
             <span>Operations</span>
             <h3>Production Improvement Projects</h3>

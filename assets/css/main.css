@@ -333,6 +333,16 @@ h3 {
   border-radius: var(--radius);
 }
 
+.hero-visual img,
+.media-placeholder img,
+.equipment-image img,
+.project-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
 .hero-visual {
   min-height: 470px;
   box-shadow: 0 26px 70px rgba(0, 0, 0, 0.32);
@@ -668,6 +678,10 @@ h3 {
   z-index: 2;
   color: rgba(255, 255, 255, 0.78);
   font-weight: 800;
+}
+
+.project-image.has-image::after {
+  content: none;
 }
 
 .project-card span {
