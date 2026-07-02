@@ -69,6 +69,9 @@ For manual setup instead of Blueprints, use:
 - Build Command: `bash build.sh`
 - Start Command: `python -m gunicorn consult.wsgi:application`
 - Required environment variables: `DATABASE_URL`, `SECRET_KEY`, `WEB_CONCURRENCY`
+- Custom domain environment variables:
+  - `ALLOWED_HOSTS=jaredetaba.secora.dev`
+  - `CSRF_TRUSTED_ORIGINS=https://jaredetaba.secora.dev`
 
 ## Notes
 
