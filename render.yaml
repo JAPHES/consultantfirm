@@ -1,0 +1,23 @@
+databases:
+  - name: jared-etaba-db
+    plan: free
+    databaseName: jared_etaba
+    user: jared_etaba
+
+services:
+  - type: web
+    name: jared-etaba
+    runtime: python
+    plan: free
+    buildCommand: bash build.sh
+    startCommand: python -m gunicorn consult.wsgi:application
+    healthCheckPath: /
+    envVars:
+      - key: DATABASE_URL
+        fromDatabase:
+          name: jared-etaba-db
+          property: connectionString
+      - key: SECRET_KEY
+        generateValue: true
+      - key: WEB_CONCURRENCY
+        value: 4

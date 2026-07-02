@@ -48,7 +48,30 @@ A Django website for **Jared Etaba Consultancy**, focused on mining and mineral 
 
 Each endpoint returns plain text `"OK"` on successful validation.
 
+## Deploying to Render
+
+This project includes Render deployment files:
+
+- `render.yaml` defines the web service and PostgreSQL database.
+- `build.sh` installs dependencies, collects static files, and runs migrations.
+- `.python-version` pins the app to Python 3.12 on Render.
+
+Recommended Render flow:
+
+1. Push this repository to GitHub, GitLab, or Bitbucket.
+2. In Render, create a new Blueprint instance from the repository.
+3. Let Render apply `render.yaml`.
+4. Wait for the build to finish and open the generated `.onrender.com` URL.
+5. After the Render site works, add the custom subdomain in Render and then create the DNS record at Name.com.
+
+For manual setup instead of Blueprints, use:
+
+- Build Command: `bash build.sh`
+- Start Command: `python -m gunicorn consult.wsgi:application`
+- Required environment variables: `DATABASE_URL`, `SECRET_KEY`, `WEB_CONCURRENCY`
+
 ## Notes
 
-- Current settings are configured for local development.
-- Update `SECRET_KEY`, `DEBUG`, and `ALLOWED_HOSTS` for production deployment.
+- Local development uses SQLite when `DATABASE_URL` is not set.
+- Render uses PostgreSQL through `DATABASE_URL`.
+- Add future custom domains to `ALLOWED_HOSTS` and `CSRF_TRUSTED_ORIGINS` environment variables if needed.
