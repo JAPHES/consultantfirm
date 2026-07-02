@@ -11,7 +11,7 @@ services:
     plan: free
     buildCommand: bash build.sh
     startCommand: python -m gunicorn consult.wsgi:application
-    healthCheckPath: /
+    healthCheckPath: /healthz/
     envVars:
       - key: DATABASE_URL
         fromDatabase:
@@ -19,5 +19,9 @@ services:
           property: connectionString
       - key: SECRET_KEY
         generateValue: true
+      - key: ALLOWED_HOSTS
+        value: jaredetaba.secora.dev
+      - key: CSRF_TRUSTED_ORIGINS
+        value: https://jaredetaba.secora.dev
       - key: WEB_CONCURRENCY
         value: 4
