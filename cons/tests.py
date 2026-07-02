@@ -10,6 +10,12 @@ class PageTests(SimpleTestCase):
 
         self.assertEqual(match.func, views.home)
 
+    def test_healthz_returns_ok(self):
+        response = self.client.get(reverse("cons:healthz"))
+
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.content, b"OK")
+
     def test_contact_form_returns_ok(self):
         response = self.client.post(
             reverse("cons:contact"),

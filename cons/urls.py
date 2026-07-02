@@ -24,6 +24,7 @@ urlpatterns = [
     path("terms.html", views.terms, name="terms_html"),
     path("404/", views.error_404, name="error_404"),
     path("404.html", views.error_404, name="error_404_html"),
+    path("healthz/", views.healthz, name="healthz"),
     path("forms/contact/", views.contact, name="contact"),
     path("forms/newsletter/", views.newsletter, name="newsletter"),
     path("forms/get-a-quote/", views.quote, name="quote"),

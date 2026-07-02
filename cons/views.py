@@ -33,6 +33,10 @@ def error_404(request, exception=None):
     return render(request, "cons/404.html", status=404)
 
 
+def healthz(request):
+    return HttpResponse("OK", content_type="text/plain")
+
+
 @require_POST
 def contact(request):
     required_fields = ["email", "phone", "message"]
