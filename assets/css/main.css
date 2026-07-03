@@ -1050,6 +1050,100 @@ h3 {
   transform: translateY(0);
 }
 
+@media (min-width: 1400px) {
+  .container {
+    width: min(1320px, calc(100% - 80px));
+  }
+
+  .container-fluid {
+    width: min(1440px, calc(100% - 80px));
+  }
+
+  .section {
+    padding: 112px 0;
+  }
+
+  .hero-section {
+    min-height: 840px;
+    padding: 170px 0 110px;
+  }
+
+  .hero-grid {
+    grid-template-columns: minmax(0, 1fr) minmax(520px, 0.95fr);
+    gap: 72px;
+  }
+
+  .hero-copy h1 {
+    font-size: 4.35rem;
+  }
+
+  .hero-copy h2 {
+    max-width: 760px;
+    font-size: 1.68rem;
+  }
+
+  .hero-description {
+    max-width: 780px;
+    font-size: 1.12rem;
+  }
+
+  .section-heading {
+    max-width: 840px;
+    margin-bottom: 50px;
+  }
+
+  .section-copy h2,
+  .section-heading h2,
+  .contact-info h2,
+  .page-hero h1 {
+    font-size: 2.62rem;
+  }
+
+  .split-layout {
+    gap: 72px;
+  }
+
+  .service-grid,
+  .equipment-grid,
+  .why-grid,
+  .project-grid,
+  .detail-grid,
+  .capability-grid {
+    gap: 26px;
+  }
+
+  .service-card {
+    padding: 30px;
+  }
+
+  .contact-grid {
+    grid-template-columns: minmax(0, 0.9fr) minmax(480px, 0.86fr);
+    gap: 72px;
+  }
+
+  .footer-grid {
+    gap: 54px;
+  }
+}
+
+@media (min-width: 1700px) {
+  .container {
+    width: min(1440px, calc(100% - 96px));
+  }
+
+  .container-fluid {
+    width: min(1540px, calc(100% - 96px));
+  }
+
+  .hero-section {
+    min-height: 880px;
+  }
+
+  .hero-grid {
+    grid-template-columns: minmax(0, 1fr) minmax(580px, 0.95fr);
+  }
+}
+
 @media (max-width: 1100px) {
   .hero-grid,
   .split-layout,
