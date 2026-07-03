@@ -290,6 +290,14 @@ h3 {
   max-width: 100%;
 }
 
+.section-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 26px;
+  max-width: 100%;
+}
+
 .btn {
   max-width: 100%;
   min-height: 48px;
@@ -1260,7 +1268,8 @@ h3 {
     display: grid;
   }
 
-  .hero-actions .btn {
+  .hero-actions .btn,
+  .section-actions .btn {
     width: 100%;
   }
 
