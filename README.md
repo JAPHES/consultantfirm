@@ -38,7 +38,6 @@ A Django website for **Jared Etaba Consultancy**, focused on mining and mineral 
    ```
 5. Open:
    - `http://127.0.0.1:8000/`
-   - `http://127.0.0.1:8000/admin/`
 
 ## Forms Endpoints
 
@@ -78,3 +77,4 @@ For manual setup instead of Blueprints, use:
 - Local development uses SQLite when `DATABASE_URL` is not set.
 - Render uses PostgreSQL through `DATABASE_URL`.
 - Add future custom domains to `ALLOWED_HOSTS` and `CSRF_TRUSTED_ORIGINS` environment variables if needed.
+- The `/admin/` route is intentionally hidden and returns the custom 404 page.

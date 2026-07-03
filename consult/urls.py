@@ -1,10 +1,10 @@
 """URL configuration for consult project."""
-from django.contrib import admin
-from django.urls import include, path
+from django.urls import include, path, re_path
 
+from cons import views
 
 urlpatterns = [
-    path("admin/", admin.site.urls),
+    re_path(r"^admin(?:/.*)?$", views.error_404, name="hidden_admin"),
     path("", include("cons.urls")),
 ]
 

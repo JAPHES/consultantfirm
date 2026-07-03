@@ -16,6 +16,21 @@ class PageTests(SimpleTestCase):
         self.assertEqual(response.status_code, 200)
         self.assertEqual(response.content, b"OK")
 
+    def test_admin_route_resolves_to_404(self):
+        match = resolve("/admin/")
+
+        self.assertEqual(match.func, views.error_404)
+
+    def test_admin_route_without_slash_resolves_to_404(self):
+        match = resolve("/admin")
+
+        self.assertEqual(match.func, views.error_404)
+
+    def test_nested_admin_route_resolves_to_404(self):
+        match = resolve("/admin/login/")
+
+        self.assertEqual(match.func, views.error_404)
+
     def test_contact_form_returns_ok(self):
         response = self.client.post(
             reverse("cons:contact"),
