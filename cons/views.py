@@ -2,7 +2,17 @@ from django.core.validators import validate_email
 from django.core.exceptions import ValidationError
 from django.http import HttpResponse, HttpResponseBadRequest
 from django.shortcuts import render
+from django.urls import reverse
 from django.views.decorators.http import require_POST
+
+
+SITEMAP_ROUTES = [
+    ("cons:home", "daily", "1.0"),
+    ("cons:service_details", "monthly", "0.8"),
+    ("cons:portfolio_details", "monthly", "0.7"),
+    ("cons:privacy", "yearly", "0.3"),
+    ("cons:terms", "yearly", "0.3"),
+]
 
 
 def home(request):
@@ -35,6 +45,47 @@ def error_404(request, exception=None):
 
 def healthz(request):
     return HttpResponse("OK", content_type="text/plain")
+
+
+def robots_txt(request):
+    lines = [
+        "User-agent: *",
+        "Allow: /",
+        "Disallow: /admin/",
+        "Disallow: /forms/",
+        "Disallow: /healthz/",
+        "",
+        f"Sitemap: {request.build_absolute_uri(reverse('cons:sitemap'))}",
+        "",
+    ]
+    return HttpResponse("\n".join(lines), content_type="text/plain")
+
+
+def sitemap(request):
+    url_items = []
+    for route_name, changefreq, priority in SITEMAP_ROUTES:
+        url_items.append(
+            "\n".join(
+                [
+                    "  <url>",
+                    f"    <loc>{request.build_absolute_uri(reverse(route_name))}</loc>",
+                    f"    <changefreq>{changefreq}</changefreq>",
+                    f"    <priority>{priority}</priority>",
+                    "  </url>",
+                ]
+            )
+        )
+
+    xml = "\n".join(
+        [
+            '<?xml version="1.0" encoding="UTF-8"?>',
+            '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">',
+            *url_items,
+            "</urlset>",
+            "",
+        ]
+    )
+    return HttpResponse(xml, content_type="application/xml")
 
 
 @require_POST
