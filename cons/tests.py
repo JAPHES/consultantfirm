@@ -1,3 +1,7 @@
+import json
+import os
+from unittest.mock import Mock, patch
+
 from django.test import SimpleTestCase
 from django.urls import resolve, reverse
 
@@ -96,3 +100,53 @@ class PageTests(SimpleTestCase):
 
         self.assertEqual(response.status_code, 200)
         self.assertEqual(response.content, b"OK")
+
+    def test_chatbot_requires_question(self):
+        response = self.client.post(
+            reverse("cons:chatbot"),
+            data=json.dumps({"question": "", "language": "en"}),
+            content_type="application/json",
+        )
+
+        self.assertEqual(response.status_code, 400)
+        self.assertEqual(response.json()["answer"], "Please type or speak a question.")
+
+    def test_chatbot_returns_swahili_fallback_without_api_key(self):
+        with patch.dict(os.environ, {"OPENAI_API_KEY": ""}):
+            response = self.client.post(
+                reverse("cons:chatbot"),
+                data=json.dumps({"question": "Mafunzo ni bei gani?", "language": "sw"}),
+                content_type="application/json",
+            )
+
+        self.assertEqual(response.status_code, 503)
+        self.assertIn("Msaidizi wa AI", response.json()["answer"])
+
+    def test_chatbot_uses_openai_responses_api(self):
+        with (
+            patch.dict(
+                os.environ,
+                {"OPENAI_API_KEY": "test-key", "OPENAI_MODEL": "test-model"},
+            ),
+            patch("cons.views.OpenAI") as openai_class,
+        ):
+            openai_response = Mock(output_text="JEA can help with pit planning.")
+            openai_class.return_value.responses.create.return_value = openai_response
+
+            response = self.client.post(
+                reverse("cons:chatbot"),
+                data=json.dumps(
+                    {"question": "Can you explain pit planning?", "language": "en"}
+                ),
+                content_type="application/json",
+            )
+
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.json()["answer"], "JEA can help with pit planning.")
+        openai_class.assert_called_once_with(api_key="test-key")
+        create_call = openai_class.return_value.responses.create.call_args
+        self.assertEqual(create_call.kwargs["model"], "test-model")
+        self.assertIn(
+            "Selected language: English",
+            create_call.kwargs["input"][0]["content"],
+        )

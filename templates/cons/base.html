@@ -137,7 +137,7 @@
 
       <div class="chatbot-messages" data-chatbot-messages aria-live="polite">
         <div class="chat-message bot-message">
-          Hello. I can answer common questions about JEA Consultancy services, training packages, fees, and how to contact Jared.
+          Hello. Choose English or Swahili, then type or speak your question about JEA Consultancy services, training packages, fees, or contacting Jared.
         </div>
       </div>
 
@@ -148,9 +148,22 @@
         <button type="button" data-chat-question="How do I contact Jared?">Contact Jared</button>
       </div>
 
-      <form class="chatbot-form" data-chatbot-form>
+      <div class="chatbot-controls">
+        <label for="chatbot-language">Language</label>
+        <select id="chatbot-language" data-chatbot-language>
+          <option value="en">English</option>
+          <option value="sw">Swahili</option>
+        </select>
+        <button class="chatbot-voice-toggle" type="button" data-chatbot-voice aria-pressed="true">Voice on</button>
+      </div>
+
+      <form class="chatbot-form" data-chatbot-form action="{% url 'cons:chatbot' %}" method="post">
+        {% csrf_token %}
         <label class="visually-hidden" for="chatbot-input">Ask JEA Assistant</label>
         <input id="chatbot-input" name="question" type="text" placeholder="Type your question..." autocomplete="off">
+        <button class="chatbot-mic" type="button" data-chatbot-mic aria-label="Speak your question">
+          <i class="bi bi-mic" aria-hidden="true"></i>
+        </button>
         <button type="submit" aria-label="Send question">
           <i class="bi bi-send" aria-hidden="true"></i>
         </button>

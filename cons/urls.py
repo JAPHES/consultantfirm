@@ -48,6 +48,7 @@ urlpatterns = [
     path("robots.txt", views.robots_txt, name="robots_txt"),
     path("sitemap.xml", views.sitemap, name="sitemap"),
     path("forms/contact/", views.contact, name="contact"),
+    path("forms/chatbot/", views.chatbot, name="chatbot"),
     path("forms/newsletter/", views.newsletter, name="newsletter"),
     path("forms/get-a-quote/", views.quote, name="quote"),
 ]

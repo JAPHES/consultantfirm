@@ -12,6 +12,8 @@ A Django website for **Jared Etaba Consultancy**, focused on mining and mineral 
 ## Features
 
 - Public marketing pages for consultancy services
+- OpenAI-backed JEA Assistant with English/Swahili responses
+- Browser voice input and spoken chatbot replies where supported
 - Contact/newsletter/quote form endpoints
 - Custom 404 page handling
 
@@ -42,10 +44,13 @@ A Django website for **Jared Etaba Consultancy**, focused on mining and mineral 
 ## Forms Endpoints
 
 - `POST /forms/contact/`
+- `POST /forms/chatbot/`
 - `POST /forms/newsletter/`
 - `POST /forms/get-a-quote/`
 
-Each endpoint returns plain text `"OK"` on successful validation.
+The contact, newsletter, and quote endpoints return plain text `"OK"` on
+successful validation. The chatbot endpoint returns JSON and keeps the OpenAI
+API key on the server.
 
 ## Deploying to Render
 
@@ -68,6 +73,9 @@ For manual setup instead of Blueprints, use:
 - Build Command: `bash build.sh`
 - Start Command: `python -m gunicorn consult.wsgi:application`
 - Required environment variables: `DATABASE_URL`, `SECRET_KEY`, `WEB_CONCURRENCY`
+- AI chatbot environment variables:
+  - `OPENAI_API_KEY=<your OpenAI API key>`
+  - `OPENAI_MODEL=gpt-5.5`
 - Custom domain environment variables:
   - `ALLOWED_HOSTS=jaredetaba.secora.dev`
   - `CSRF_TRUSTED_ORIGINS=https://jaredetaba.secora.dev`
@@ -76,5 +84,6 @@ For manual setup instead of Blueprints, use:
 
 - Local development uses SQLite when `DATABASE_URL` is not set.
 - Render uses PostgreSQL through `DATABASE_URL`.
+- The chatbot uses OpenAI for text answers. Voice listening and speaking use the visitor's browser speech features, so support can vary by browser and device.
 - Add future custom domains to `ALLOWED_HOSTS` and `CSRF_TRUSTED_ORIGINS` environment variables if needed.
 - The `/admin/` route is intentionally hidden and returns the custom 404 page.
