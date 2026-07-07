@@ -1,4 +1,5 @@
 import json
+import logging
 import os
 
 from django.core.validators import validate_email
@@ -12,6 +13,9 @@ try:
     from openai import OpenAI
 except ImportError:
     OpenAI = None
+
+
+logger = logging.getLogger(__name__)
 
 
 SITEMAP_ROUTES = [
@@ -239,6 +243,11 @@ def chatbot(request):
             ],
         )
     except Exception:
+        logger.exception(
+            "OpenAI chatbot request failed for language=%s model=%s",
+            language,
+            model,
+        )
         return JsonResponse(
             {"answer": CHATBOT_FALLBACKS["service_error"][language]},
             status=502,
