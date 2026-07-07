@@ -70,6 +70,25 @@ class PageTests(SimpleTestCase):
             response,
             "<loc>http://testserver/crusher-maintenance-consultancy/</loc>",
         )
+        self.assertNotContains(response, "<loc>http://testserver/privacy/</loc>")
+        self.assertNotContains(response, "<loc>http://testserver/terms/</loc>")
+
+    def test_legal_pages_are_not_indexed(self):
+        expected_pages = [
+            reverse("cons:privacy"),
+            reverse("cons:terms"),
+        ]
+
+        for url in expected_pages:
+            with self.subTest(url=url):
+                response = self.client.get(url)
+
+                self.assertEqual(response.status_code, 200)
+                self.assertContains(
+                    response,
+                    '<meta name="robots" content="noindex, follow">',
+                    html=True,
+                )
 
     def test_admin_route_resolves_to_404(self):
         match = resolve("/admin/")

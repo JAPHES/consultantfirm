@@ -26,8 +26,6 @@ SITEMAP_ROUTES = [
     ("cons:crusher_maintenance_consultancy", "monthly", "0.8"),
     ("cons:service_details", "monthly", "0.8"),
     ("cons:portfolio_details", "monthly", "0.7"),
-    ("cons:privacy", "yearly", "0.3"),
-    ("cons:terms", "yearly", "0.3"),
 ]
 
 CHATBOT_CONTEXT = """
