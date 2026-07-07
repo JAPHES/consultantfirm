@@ -8,6 +8,10 @@ from django.views.decorators.http import require_POST
 
 SITEMAP_ROUTES = [
     ("cons:home", "daily", "1.0"),
+    ("cons:drilling_blasting_training", "monthly", "0.9"),
+    ("cons:pit_design_mine_planning", "monthly", "0.9"),
+    ("cons:technical_drawing_training", "monthly", "0.9"),
+    ("cons:crusher_maintenance_consultancy", "monthly", "0.8"),
     ("cons:service_details", "monthly", "0.8"),
     ("cons:portfolio_details", "monthly", "0.7"),
     ("cons:privacy", "yearly", "0.3"),
@@ -25,6 +29,22 @@ def portfolio_details(request):
 
 def service_details(request):
     return render(request, "cons/service-details.html")
+
+
+def drilling_blasting_training(request):
+    return render(request, "cons/drilling-blasting-training.html")
+
+
+def pit_design_mine_planning(request):
+    return render(request, "cons/pit-design-mine-planning.html")
+
+
+def technical_drawing_training(request):
+    return render(request, "cons/technical-drawing-mining-software-training.html")
+
+
+def crusher_maintenance_consultancy(request):
+    return render(request, "cons/crusher-maintenance-consultancy.html")
 
 
 def starter_page(request):

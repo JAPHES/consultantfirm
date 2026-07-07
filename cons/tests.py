@@ -10,6 +10,22 @@ class PageTests(SimpleTestCase):
 
         self.assertEqual(match.func, views.home)
 
+    def test_seo_landing_routes_resolve(self):
+        expected_routes = {
+            "cons:drilling_blasting_training": views.drilling_blasting_training,
+            "cons:pit_design_mine_planning": views.pit_design_mine_planning,
+            "cons:technical_drawing_training": views.technical_drawing_training,
+            "cons:crusher_maintenance_consultancy": (
+                views.crusher_maintenance_consultancy
+            ),
+        }
+
+        for route_name, view_func in expected_routes.items():
+            with self.subTest(route_name=route_name):
+                match = resolve(reverse(route_name))
+
+                self.assertEqual(match.func, view_func)
+
     def test_healthz_returns_ok(self):
         response = self.client.get(reverse("cons:healthz"))
 
@@ -33,6 +49,22 @@ class PageTests(SimpleTestCase):
         self.assertContains(
             response,
             "<loc>http://testserver/service-details/</loc>",
+        )
+        self.assertContains(
+            response,
+            "<loc>http://testserver/drilling-blasting-training/</loc>",
+        )
+        self.assertContains(
+            response,
+            "<loc>http://testserver/pit-design-mine-planning/</loc>",
+        )
+        self.assertContains(
+            response,
+            "<loc>http://testserver/technical-drawing-mining-software-training/</loc>",
+        )
+        self.assertContains(
+            response,
+            "<loc>http://testserver/crusher-maintenance-consultancy/</loc>",
         )
 
     def test_admin_route_resolves_to_404(self):

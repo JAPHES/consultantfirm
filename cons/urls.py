@@ -16,6 +16,26 @@ urlpatterns = [
     ),
     path("service-details/", views.service_details, name="service_details"),
     path("service-details.html", views.service_details, name="service_details_html"),
+    path(
+        "drilling-blasting-training/",
+        views.drilling_blasting_training,
+        name="drilling_blasting_training",
+    ),
+    path(
+        "pit-design-mine-planning/",
+        views.pit_design_mine_planning,
+        name="pit_design_mine_planning",
+    ),
+    path(
+        "technical-drawing-mining-software-training/",
+        views.technical_drawing_training,
+        name="technical_drawing_training",
+    ),
+    path(
+        "crusher-maintenance-consultancy/",
+        views.crusher_maintenance_consultancy,
+        name="crusher_maintenance_consultancy",
+    ),
     path("starter-page/", views.starter_page, name="starter_page"),
     path("starter-page.html", views.starter_page, name="starter_page_html"),
     path("privacy/", views.privacy, name="privacy"),
