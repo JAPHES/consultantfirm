@@ -3,6 +3,9 @@
 
 {% block title %}JEA Consultancy Firm | Mining and Mineral Processing Engineering{% endblock %}
 {% block meta_description %}JEA Consultancy Firm by Jared Etaba provides mining and mineral processing engineering consultancy, pit design, crusher maintenance, technical drawing, and practical mining training packages.{% endblock %}
+{% block extra_head %}
+  <link rel="preload" as="image" href="{% static 'assets/img/about/mining-web.jpg' %}" fetchpriority="high">
+{% endblock %}
 {% block body_class %}home-page{% endblock %}
 
 {% block content %}
@@ -21,7 +24,7 @@
         </div>
 
         <div class="hero-visual reveal has-image" role="img" aria-label="Mining operations image">
-          <img src="{% static 'assets/img/about/mining.jpg' %}" alt="Mining operations">
+          <img src="{% static 'assets/img/about/mining-web.jpg' %}" alt="Mining operations" decoding="async" fetchpriority="high">
         </div>
       </div>
     </div>
@@ -31,7 +34,7 @@
     <div class="container">
       <div class="split-layout align-items-center">
         <div class="media-placeholder reveal has-image" role="img" aria-label="Jared Etaba professional image">
-          <img src="{% static 'assets/img/about/jared.jpeg' %}" alt="Jared Etaba professional photo">
+          <img src="{% static 'assets/img/about/jared.jpeg' %}" alt="Jared Etaba professional photo" loading="lazy" decoding="async">
         </div>
 
         <div class="section-copy reveal">
@@ -327,7 +330,7 @@
       <div class="equipment-grid">
         <article class="equipment-card reveal">
           <div class="equipment-image has-image" role="img" aria-label="Jaw crusher image">
-            <img src="{% static 'assets/img/equipment/jawcrusher.jpeg' %}" alt="Jaw crusher">
+            <img src="{% static 'assets/img/equipment/jawcrusher.jpeg' %}" alt="Jaw crusher" loading="lazy" decoding="async">
           </div>
           <h3>Jaw Crusher</h3>
           <p>Primary crushing equipment for hard rock size reduction, feed control, liner inspection, and throughput stability.</p>
@@ -335,7 +338,7 @@
 
         <article class="equipment-card reveal">
           <div class="equipment-image has-image" role="img" aria-label="Cone crusher image">
-            <img src="{% static 'assets/img/equipment/conecrusher.jpg' %}" alt="Cone crusher">
+            <img src="{% static 'assets/img/equipment/conecrusher-web.jpg' %}" alt="Cone crusher" loading="lazy" decoding="async">
           </div>
           <h3>Cone Crusher</h3>
           <p>Secondary and tertiary crushing systems requiring chamber selection, closed side setting control, and wear monitoring.</p>
@@ -343,7 +346,7 @@
 
         <article class="equipment-card reveal">
           <div class="equipment-image has-image" role="img" aria-label="Vibrating screen image">
-            <img src="{% static 'assets/img/equipment/vibrating-screen.jpg' %}" alt="Vibrating screen">
+            <img src="{% static 'assets/img/equipment/vibrating-screen-web.jpg' %}" alt="Vibrating screen" loading="lazy" decoding="async">
           </div>
           <h3>Vibrating Screen</h3>
           <p>Classification equipment for efficient separation, deck performance, screen media selection, and vibration checks.</p>
@@ -351,7 +354,7 @@
 
         <article class="equipment-card reveal">
           <div class="equipment-image has-image" role="img" aria-label="Conveyor systems image">
-            <img src="{% static 'assets/img/equipment/conveyor-system.jpg' %}" alt="Conveyor systems">
+            <img src="{% static 'assets/img/equipment/conveyor-system-web.jpg' %}" alt="Conveyor systems" loading="lazy" decoding="async">
           </div>
           <h3>Conveyor Systems</h3>
           <p>Material handling systems covering belt loading, transfer points, alignment, spillage control, and reliability improvement.</p>
@@ -389,7 +392,7 @@
       <div class="project-grid">
         <article class="project-card reveal">
           <div class="project-image has-image" role="img" aria-label="Crushing plant design project image">
-            <img src="{% static 'assets/img/projects/crushing-point.jpg' %}" alt="Crushing plant design project">
+            <img src="{% static 'assets/img/projects/crushing-point-web.jpg' %}" alt="Crushing plant design project" loading="lazy" decoding="async">
           </div>
           <div>
             <span>Plant Design</span>
@@ -400,7 +403,7 @@
 
         <article class="project-card reveal">
           <div class="project-image has-image" role="img" aria-label="Pit optimization project image">
-            <img src="{% static 'assets/img/projects/pit-optimization.jpg' %}" alt="Pit optimization project">
+            <img src="{% static 'assets/img/projects/pit-optimization-web.jpg' %}" alt="Pit optimization project" loading="lazy" decoding="async">
           </div>
           <div>
             <span>Mine Planning</span>
@@ -411,7 +414,7 @@
 
         <article class="project-card reveal">
           <div class="project-image has-image" role="img" aria-label="Maintenance project image">
-            <img src="{% static 'assets/img/projects/maintenaince-project.jpg' %}" alt="Maintenance project">
+            <img src="{% static 'assets/img/projects/maintenaince-project-web.jpg' %}" alt="Maintenance project" loading="lazy" decoding="async">
           </div>
           <div>
             <span>Reliability</span>
@@ -422,7 +425,7 @@
 
         <article class="project-card reveal">
           <div class="project-image has-image" role="img" aria-label="Production improvement project image">
-            <img src="{% static 'assets/img/projects/project-improvement.jpg' %}" alt="Production improvement project">
+            <img src="{% static 'assets/img/projects/project-improvement-web.jpg' %}" alt="Production improvement project" loading="lazy" decoding="async">
           </div>
           <div>
             <span>Operations</span>

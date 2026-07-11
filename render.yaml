@@ -24,7 +24,7 @@ services:
       - key: CSRF_TRUSTED_ORIGINS
         value: https://jaredetaba.secora.dev
       - key: WEB_CONCURRENCY
-        value: 4
+        value: 2
       - key: OPENAI_API_KEY
         sync: false
       - key: OPENAI_MODEL
