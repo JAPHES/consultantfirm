@@ -1,0 +1,2 @@
+[tool.vercel]
+entrypoint = "consult.wsgi:application"

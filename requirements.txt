@@ -1,6 +1,4 @@
 Django>=5.0,<6.0
 dj-database-url>=3.0,<4.0
-gunicorn>=21.2,<24.0
 openai>=2.44,<3.0
 psycopg2-binary>=2.9,<3.0
-whitenoise[brotli]>=6.7,<7.0

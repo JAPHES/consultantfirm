@@ -1,0 +1,10 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "framework": "django",
+  "functions": {
+    "consult/wsgi.py": {
+      "maxDuration": 60,
+      "excludeFiles": "{.git/**,.venv/**,venv/**,staticfiles/**,assets/**,db.sqlite3,**/__pycache__/**,**/*.pyc,cons/tests.py}"
+    }
+  }
+}

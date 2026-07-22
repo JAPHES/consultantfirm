@@ -11,20 +11,29 @@ import dj_database_url
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-SECRET_KEY = os.environ.get("SECRET_KEY", "django-insecure-change-me-for-production")
+IS_VERCEL = os.environ.get("VERCEL") == "1"
 
-DEBUG = os.environ.get("DEBUG", "False" if os.environ.get("RENDER") else "True").lower() in {
+SECRET_KEY = (
+    os.environ.get("DJANGO_SECRET_KEY")
+    or os.environ.get("SECRET_KEY")
+    or "django-insecure-change-me-for-production"
+)
+
+DEBUG = os.environ.get("DEBUG", "False" if IS_VERCEL else "True").lower() in {
     "1",
     "true",
     "yes",
     "on",
 }
 
-ALLOWED_HOSTS = ["127.0.0.1", "localhost"]
+ALLOWED_HOSTS = ["127.0.0.1", "localhost", "jaredetaba.secora.dev"]
 
-render_external_hostname = os.environ.get("RENDER_EXTERNAL_HOSTNAME")
-if render_external_hostname:
-    ALLOWED_HOSTS.append(render_external_hostname)
+if IS_VERCEL:
+    ALLOWED_HOSTS.append(".vercel.app")
+
+vercel_hostname = os.environ.get("VERCEL_URL")
+if vercel_hostname:
+    ALLOWED_HOSTS.append(vercel_hostname)
 
 additional_hosts = os.environ.get("ALLOWED_HOSTS", "")
 if additional_hosts:
@@ -37,8 +46,11 @@ CSRF_TRUSTED_ORIGINS = [
     for origin in os.environ.get("CSRF_TRUSTED_ORIGINS", "").split(",")
     if origin.strip()
 ]
-if render_external_hostname:
-    CSRF_TRUSTED_ORIGINS.append(f"https://{render_external_hostname}")
+CSRF_TRUSTED_ORIGINS.append("https://jaredetaba.secora.dev")
+if IS_VERCEL:
+    CSRF_TRUSTED_ORIGINS.append("https://*.vercel.app")
+if vercel_hostname:
+    CSRF_TRUSTED_ORIGINS.append(f"https://{vercel_hostname}")
 
 
 INSTALLED_APPS = [
@@ -53,7 +65,6 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
-    "whitenoise.middleware.WhiteNoiseMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
@@ -91,10 +102,11 @@ if DATABASE_URL:
         )
     }
 else:
+    sqlite_path = Path("/tmp/db.sqlite3") if IS_VERCEL else BASE_DIR / "db.sqlite3"
     DATABASES = {
         "default": {
             "ENGINE": "django.db.backends.sqlite3",
-            "NAME": BASE_DIR / "db.sqlite3",
+            "NAME": sqlite_path,
         }
     }
 
@@ -132,11 +144,7 @@ STORAGES = {
         "BACKEND": "django.core.files.storage.FileSystemStorage",
     },
     "staticfiles": {
-        "BACKEND": (
-            "django.contrib.staticfiles.storage.StaticFilesStorage"
-            if DEBUG
-            else "whitenoise.storage.CompressedManifestStaticFilesStorage"
-        ),
+        "BACKEND": "django.contrib.staticfiles.storage.StaticFilesStorage",
     },
 }
 

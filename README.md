@@ -52,38 +52,43 @@ The contact, newsletter, and quote endpoints return plain text `"OK"` on
 successful validation. The chatbot endpoint returns JSON and keeps the OpenAI
 API key on the server.
 
-## Deploying to Render
+## Deploying to Vercel
 
-This project includes Render deployment files:
+This project is prepared for Vercel's Python runtime and Django framework
+detection:
 
-- `render.yaml` defines the web service and PostgreSQL database.
-- `build.sh` installs dependencies, collects static files, and runs migrations.
-- `.python-version` pins the app to Python 3.12 on Render.
+- `vercel.json` configures the Django function.
+- `pyproject.toml` points Vercel to `consult.wsgi:application`.
+- `.python-version` pins the app to Python 3.12.
+- `STATIC_ROOT` is configured, so Vercel can collect and serve static files.
 
-Recommended Render flow:
+Recommended Vercel flow:
 
 1. Push this repository to GitHub, GitLab, or Bitbucket.
-2. In Render, create a new Blueprint instance from the repository.
-3. Let Render apply `render.yaml`.
-4. Wait for the build to finish and open the generated `.onrender.com` URL.
-5. After the Render site works, add the custom subdomain in Render and then create the DNS record at Name.com.
+2. In Vercel, create a new project and import the repository.
+3. Use the detected Django/Python settings.
+4. Leave Build Command and Output Directory as Vercel defaults.
+5. Add the environment variables below.
+6. Deploy and open the generated `.vercel.app` URL.
+7. After the Vercel site works, add the custom subdomain in Vercel and update DNS at Name.com.
 
-For manual setup instead of Blueprints, use:
+Required Vercel environment variables:
 
-- Build Command: `bash build.sh`
-- Start Command: `python -m gunicorn consult.wsgi:application`
-- Required environment variables: `DATABASE_URL`, `SECRET_KEY`, `WEB_CONCURRENCY`
-- AI chatbot environment variables:
-  - `OPENAI_API_KEY=<your OpenAI API key>`
-  - `OPENAI_MODEL=gpt-5.5`
-- Custom domain environment variables:
-  - `ALLOWED_HOSTS=jaredetaba.secora.dev`
-  - `CSRF_TRUSTED_ORIGINS=https://jaredetaba.secora.dev`
+- `DJANGO_SECRET_KEY=<generated Django secret key>`
+- `DEBUG=False`
+- `OPENAI_API_KEY=<your OpenAI API key>`
+- `OPENAI_MODEL=gpt-5.5`
+
+Optional environment variables:
+
+- `DATABASE_URL=<PostgreSQL connection string>` if a persistent database is added later.
+- `ALLOWED_HOSTS=<extra domains>` if deploying to another custom domain.
+- `CSRF_TRUSTED_ORIGINS=<extra https origins>` if deploying to another custom domain.
 
 ## Notes
 
 - Local development uses SQLite when `DATABASE_URL` is not set.
-- Render uses PostgreSQL through `DATABASE_URL`.
+- On Vercel, public forms currently validate and respond without storing submissions in a database.
 - The chatbot uses OpenAI for text answers. Voice listening and speaking use the visitor's browser speech features, so support can vary by browser and device.
 - Add future custom domains to `ALLOWED_HOSTS` and `CSRF_TRUSTED_ORIGINS` environment variables if needed.
 - The `/admin/` route is intentionally hidden and returns the custom 404 page.
