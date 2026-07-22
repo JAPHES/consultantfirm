@@ -58,7 +58,7 @@ This project is prepared for Vercel's Python runtime and Django framework
 detection:
 
 - `vercel.json` configures the Django function.
-- `pyproject.toml` points Vercel to `consult.wsgi:application`.
+- `manage.py` and `WSGI_APPLICATION` let Vercel detect the Django entrypoint.
 - `.python-version` pins the app to Python 3.12.
 - `STATIC_ROOT` is configured, so Vercel can collect and serve static files.
 
